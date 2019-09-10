@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/.*
+.*/lib/.*
+.*\.test\.js
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+
+[strict]
