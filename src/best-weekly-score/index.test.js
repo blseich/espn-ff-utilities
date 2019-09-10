@@ -1,40 +1,49 @@
 import bestWeeklyScore from '.';
-import bestLineup from '../best-lineup';
+import getCurrentScoringPeriodResults from '../utilities/current-scoring-period-results';
+import getTeamScoringPeriodResult from '../utilities/team-scoring-period-result';
+import bestLineupScore from './best-lineup-score';
 
-// setup mocks
-jest.mock('../best-lineup');
+jest.mock('../utilities/current-scoring-period-results');
+jest.mock('../utilities/team-scoring-period-result');
+jest.mock('./best-lineup-score');
 
-const mockSettings = {};
-const mockPlayers = [];
+const scoringPeriodId = 1;
+const schedule = {};
+const settings = {};
 
-const mockPlayer1 = {
-    playerPoolEntry: {
-        appliedStatTotal: 10,
-    },
-};
-const mockPlayer2 = {
-    playerPoolEntry: {
-        appliedStatTotal: 15,
-    },
-};
-const mockPlayer3 = {
-    playerPoolEntry: {
-        appliedStatTotal: 25,
+const mockAllTeamsResults = [];
+const mockTeamResult = {
+    rosterForCurrentScoringPeriod: {
+        entries: [],
     },
 };
 
 describe('Best Weekly Score', () => {
-    beforeEach(() => {
-        bestLineup.mockReturnValue([]);
+    beforeAll(() => {
+        getCurrentScoringPeriodResults.mockReturnValue(mockAllTeamsResults);
+        getTeamScoringPeriodResult.mockReturnValue(mockTeamResult);
+        bestLineupScore.mockReturnValue(200);
     });
 
-    it('should get best possible lineup', () => {
-        bestWeeklyScore(mockSettings, mockPlayers);
-        expect(bestLineup).toHaveBeenCalledWith(mockSettings, mockPlayers);
+    it('should get current scoring period results', () => {
+        bestWeeklyScore(scoringPeriodId, 0, schedule, settings);
+        expect(getCurrentScoringPeriodResults).toHaveBeenCalledWith(scoringPeriodId, schedule);
     });
 
-    it('should sum up appliedStatTotal for each player returned', () => {
-        bestLineup.mockReturnValue([mockPlayer1, mockPlayer2, mockPlayer3]);
-        expect(bestWeeklyScore(mockSettings, mockPlayers)).toBe(50);
+    it('should get single team results', () => {
+        bestWeeklyScore(scoringPeriodId, 0, schedule, settings);
+        expect(getTeamScoringPeriodResult).toHaveBeenCalledWith(0, mockAllTeamsResults);
+    });
+
+    it('should get best lineup score with team results', () => {
+        bestWeeklyScore(scoringPeriodId, 0, schedule, settings);
+        expect(bestLineupScore).toHaveBeenCalledWith(
+            settings,
+            mockTeamResult.rosterForCurrentScoringPeriod.entries,
+        );
+    });
+
+    it('should return best lineup score', () => {
+        expect(bestLineupScore(scoringPeriodId, 0, schedule, settings)).toBe(200);
     });
 });

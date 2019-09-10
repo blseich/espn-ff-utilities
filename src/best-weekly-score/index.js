@@ -1,28 +1,19 @@
 // @flow
-import bestLineup from '../best-lineup';
+import getCurrentScoringPeriodResults from '../utilities/current-scoring-period-results';
+import getTeamScoringPeriodResult from '../utilities/team-scoring-period-result';
+import bestLineupScore from './best-lineup-score';
 
-type PlayerType = {
-    playerPoolEntry: {
-    appliedStatTotal: number,
-    player: {
-      eligibleSlots: Array<number>
-    }
-  }
-};
-type SettingsType = {
-  rosterSettings: {
-    lineupSlotCounts: {}
-  }
-};
+import { type Matchup, type Settings } from '../types';
 
-const sumAppliedStatTotal = (acc: number, player: PlayerType): number => (
-    acc + player.playerPoolEntry.appliedStatTotal
-);
-
-
-const bestWeeklyScore = (settings: SettingsType, players: Array<PlayerType>): number => {
-    const highestScoreingLineup = bestLineup(settings, players);
-    return highestScoreingLineup.reduce(sumAppliedStatTotal, 0);
+const bestWeeklyScore = (
+    scoringPeriodId: number,
+    teamId: number,
+    schedule: Array<Matchup>,
+    settings: Settings,
+): number => {
+    const allPlayerResults = getCurrentScoringPeriodResults(scoringPeriodId, schedule);
+    const resultForScoringPeriod = getTeamScoringPeriodResult(teamId, allPlayerResults);
+    return bestLineupScore(settings, resultForScoringPeriod.rosterForCurrentScoringPeriod.entries);
 };
 
 export default bestWeeklyScore;

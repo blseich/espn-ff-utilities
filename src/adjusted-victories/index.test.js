@@ -1,58 +1,40 @@
 import adjustedVictories from '.';
+import getCurrentScoringPeriodResults from '../utilities/current-scoring-period-results';
 
-const mockSchedule = [
+jest.mock('../utilities/current-scoring-period-results');
+
+const mockSchedule = {};
+const scoringPeriodId = 1;
+const mockScoringPeriodResults = [
     {
-        away: {
-            teamId: 0,
-            totalPoints: 100,
-        },
-        home: {
-            teamId: 1,
-            totalPoints: 101,
-        },
-        matchupPeriodId: 1,
+        teamId: 0,
+        totalPoints: 100,
     },
     {
-        away: {
-            teamId: 2,
-            totalPoints: 99,
-        },
-        home: {
-            teamId: 3,
-            totalPoints: 102,
-        },
-        matchupPeriodId: 1,
+        teamId: 1,
+        totalPoints: 101,
     },
     {
-        away: {
-            teamId: 0,
-            totalPoints: 120,
-        },
-        home: {
-            teamId: 1,
-            totalPoints: 130,
-        },
-        matchupPeriodId: 2,
+        teamId: 2,
+        totalPoints: 99,
     },
-];
+    {
+        teamId: 3,
+        totalPoints: 102,
+    }];
 
 describe('Adjusted Victories', () => {
+    beforeAll(() => {
+        getCurrentScoringPeriodResults.mockReturnValue(mockScoringPeriodResults);
+    });
+
     it('should be a function', () => {
         expect(typeof adjustedVictories).toBe('function');
     });
 
-    xit('should return current array of current period schedule items', () => {
-        expect(adjustedVictories(1, 0, mockSchedule)).toBeArrayOfSize(2);
-    });
-
-    xit('should return matchup score for provided player id', () => {
-        expect(adjustedVictories(1, 0, mockSchedule)).toBe(100);
-    });
-
-    xit('should throw an error if player id is not found in matchup results', () => {
-        expect(() => {
-            adjustedVictories(1, 99, mockSchedule);
-        }).toThrow('ERROR: Player Id not found in current scoring period');
+    it('should get matchup results for current scoring period id', () => {
+        adjustedVictories(scoringPeriodId, 0, mockSchedule);
+        expect(getCurrentScoringPeriodResults).toHaveBeenCalledWith(scoringPeriodId, mockSchedule);
     });
 
     it('should return number of adjusted victories for given player and matchup id', () => {

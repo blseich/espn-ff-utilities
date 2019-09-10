@@ -1,47 +1,23 @@
 // @flow
-type PlayerMatchupResultType = {
-    teamId: number,
-    totalPoints: number
-};
+import getCurrentScoringPeriodResults from '../utilities/current-scoring-period-results';
+import getTeamScoringPeriodResult from '../utilities/team-scoring-period-result';
+import { type TeamScoringPeriodResult, type Matchup } from '../types';
 
-type MatchupType = {
-    away: PlayerMatchupResultType,
-    home: PlayerMatchupResultType,
-    matchupPeriodId: number
-};
-
-const getCurrentScoringPeriodMatchups = (
-    scoringPeriodId: number,
-    schedule: Array<MatchupType>,
-): Array<MatchupType> => (
-    schedule.filter((matchup: MatchupType): boolean => matchup.matchupPeriodId === scoringPeriodId)
-);
-
-const extractIndividualMatchupResults = (
-    acc: Array<PlayerMatchupResultType>,
-    matchup: MatchupType,
-): Array<PlayerMatchupResultType> => acc.concat([matchup.home, matchup.away]);
+type TotalPointsCompareCb = (m: TeamScoringPeriodResult) => boolean;
 
 const teamsScoringLowerThan = (
     playerTotalPoints: number,
-): (m: PlayerMatchupResultType
-) => boolean => (
-    (m: PlayerMatchupResultType): boolean => m.totalPoints < playerTotalPoints
+): TotalPointsCompareCb => (
+    (m: TeamScoringPeriodResult): boolean => m.totalPoints < playerTotalPoints
 );
 
 const adjustedVictories = (
     scoringPeriodId: number,
     teamId: number,
-    schedule: Array<MatchupType>,
+    schedule: Array<Matchup>,
 ): number => {
-    const allPlayerMatch = getCurrentScoringPeriodMatchups(scoringPeriodId, schedule)
-        .reduce(extractIndividualMatchupResults, []);
-    const playerMatch = allPlayerMatch.find((pmr: PlayerMatchupResultType): boolean => (
-        pmr.teamId === teamId
-    ));
-    if (playerMatch === undefined) {
-        throw Error('ERROR: Player Id not found in current scoring period');
-    }
+    const allPlayerMatch = getCurrentScoringPeriodResults(scoringPeriodId, schedule);
+    const playerMatch = getTeamScoringPeriodResult(teamId, allPlayerMatch);
     return allPlayerMatch.filter(teamsScoringLowerThan(playerMatch.totalPoints)).length;
 };
 

@@ -18,7 +18,8 @@ module.exports = {
   },
   plugins: [
     "jest",
-    "flowtype"
+    "flowtype",
+    "import",
   ],
   rules: {
     indent: ['error', 4],
@@ -72,7 +73,7 @@ module.exports = {
     ],
     "flowtype/type-id-match": [
       2,
-      "^([A-Z][a-z0-9]+)+Type$"
+      "^([A-Z][a-z0-9]+)+$"
     ],
     "flowtype/union-intersection-spacing": [
       2,
