@@ -1,7 +1,7 @@
 {
-  "name": "ff-coaching-score",
-  "version": "0.1.1",
-  "description": "A module that utilizes ESPN's fantasy football API structure to determine the amount of points a given team left on the bench in any given week",
+  "name": "espn-ff-utilities",
+  "version": "0.1.2",
+  "description": "A module that utilizes ESPN's fantasy football API structure to provide useful data about a teams performance on a weekly basis",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
@@ -28,6 +28,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.15.2",
     "flow-bin": "^0.106.2",
+    "flow-typed": "^2.6.1",
     "jest": "^24.9.0",
     "jest-extended": "^0.11.2"
   }
