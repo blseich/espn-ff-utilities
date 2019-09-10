@@ -1,6 +1,6 @@
 {
   "name": "ff-coaching-score",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A module that utilizes ESPN's fantasy football API structure to determine the amount of points a given team left on the bench in any given week",
   "main": "lib/index.js",
   "scripts": {

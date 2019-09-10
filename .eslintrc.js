@@ -21,6 +21,7 @@ module.exports = {
     "flowtype"
   ],
   rules: {
+    indent: ['error', 4],
     radix: 0, //turn off radix requirements for Number.parseInt
     "flowtype/boolean-style": [
       2,
