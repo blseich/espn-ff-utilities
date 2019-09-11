@@ -47,38 +47,50 @@ describe('Record Versus', () => {
     });
 
     it('should get all valid matchups', () => {
-        recordVersus(teamId, opposingIds, schedule);
-        expect(validMatchups).toHaveBeenCalledWith(teamId, opposingIds, schedule);
+        recordVersus(1, teamId, opposingIds, schedule);
+        expect(validMatchups).toHaveBeenCalledWith(1, teamId, opposingIds, schedule);
     });
 
     it('should return record of 0 wins and 0 losses when there are no valid matchups', () => {
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 0, losses: 0 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 0, losses: 0 },
+        );
     });
 
     it('should add up games in which team Id won as home team', () => {
         validMatchups.mockReturnValue([teamWonAsHomeTeam]);
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 1, losses: 0 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 1, losses: 0 },
+        );
     });
 
     it('should add up games in whichh team Id lost as home team', () => {
         validMatchups.mockReturnValue([teamLostAsHomeTeam]);
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 0, losses: 1 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 0, losses: 1 },
+        );
     });
 
     it('should add up games in whichh team Id won as away team', () => {
         validMatchups.mockReturnValue([teamWonAsAwayTeam]);
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 1, losses: 0 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 1, losses: 0 },
+        );
     });
 
     it('should add up games in which team Id lost as away team', () => {
         validMatchups.mockReturnValue([teamLostAsAwayTeam]);
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 0, losses: 1 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 0, losses: 1 },
+        );
     });
 
     it('should add up several games together', () => {
         validMatchups.mockReturnValue([
             teamLostAsAwayTeam, teamWonAsHomeTeam, teamLostAsHomeTeam, teamWonAsAwayTeam,
         ]);
-        expect(recordVersus(teamId, opposingIds, schedule)).toStrictEqual({ wins: 2, losses: 2 });
+        expect(recordVersus(1, teamId, opposingIds, schedule)).toStrictEqual(
+            { wins: 2, losses: 2 },
+        );
     });
 });

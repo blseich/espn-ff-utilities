@@ -11,11 +11,12 @@ const wasAwayTeamAndWon = (teamId: number, m: Matchup): boolean => (
 );
 
 const recordVersus = (
+    scoringPeriodId: number,
     teamId: number,
     opposingIds: Array<number>,
     schedule: Array<Matchup>,
 ): Record => (
-    validMatchups(teamId, opposingIds, schedule)
+    validMatchups(scoringPeriodId, teamId, opposingIds, schedule)
         .reduce((acc: Record, m: Matchup): Record => {
             const { losses, wins } = acc;
             return wasHomeTeamAndWon(teamId, m) || wasAwayTeamAndWon(teamId, m)
