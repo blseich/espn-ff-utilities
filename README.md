@@ -9,7 +9,7 @@ A library for extracting useful metrics from ESPN's v3 fantasy football API. The
  - To fetch responses from this URL you will need the `SWID` and `espn_s2` cookies from the .espn.com domain
  - For now this package only works with the information provided from the query parameters specified above _as well as_ a specified `scoringPeriodId` query parameter to fetch results for past weeks.
 ### Relevant Fields
-This modules uses information from the `settings` and `schedule` fields of the response. The `teams` and `scoringPeriodId` fields are not used directly by this module but are helpful for providing this module with the necessary information.
+This module uses information from the `settings` and `schedule` fields of the response. The `teams` and `scoringPeriodId` fields are not used directly by this module but are helpful for providing this module with the necessary information.
 
 ## Functions
 
@@ -31,7 +31,7 @@ adjustedVictories(
 Calculates the number of victories a team would have secured if they played every other team in the league that week. For example:
 > Team 1: 105pts, Team 2: 110pts, Team 3: 100pts
 >
-> Team 1 adjusted victories = 1</br>Team 2 adjusted victories = 2</br>Team 3 adjusted victories = 3
+> Team 1 adjusted victories = 1</br>Team 2 adjusted victories = 2</br>Team 3 adjusted victories = 0
 
 ### bestWeeklyScore
 ```ts
