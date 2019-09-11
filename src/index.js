@@ -28,7 +28,7 @@ type InitializedFunctionsWithSpi = {
     recordVersus: InitializedRecordVersusWithSpiFn
 };
 
-const init = (schedule: Matchup, settings: Settings): InitializedFunctions => {
+const init = (schedule: Array<Matchup>, settings: Settings): InitializedFunctions => {
     const adjVictoriesInit: InitializedAdjustedVictoriesFn = (scoringPeriodId, teamId) => (
         adjustedVictories(scoringPeriodId, teamId, schedule)
     );
@@ -51,7 +51,7 @@ const init = (schedule: Matchup, settings: Settings): InitializedFunctions => {
 
 const initForScoringPeriod = (
     scoringPeriodId: number,
-    schedule: Matchup,
+    schedule: Array<Matchup>,
     settings: Settings,
 ): InitializedFunctionsWithSpi => {
     const adjVictoriesInit: InitializedAdjustedVictoriesWithSpiFn = (teamId) => (
