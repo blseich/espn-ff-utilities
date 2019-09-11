@@ -12,6 +12,10 @@
   "keywords": [
     "fantasy"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blseich/espn-ff-utilities"
+  },
   "author": "blseich",
   "license": "ISC",
   "devDependencies": {
