@@ -16,7 +16,7 @@ const isValidMatchup = (
     opposingIds: Array<number>,
 ): ScheduleFilterCb => (
     (m: Matchup): boolean => (
-        m.scoringPeriodId <= scoringPeriodId && (
+        m.matchupPeriodId <= scoringPeriodId && (
             (isAwayTeam(m, teamId) && isHomeTeam(m, ...opposingIds))
                 || (isHomeTeam(m, teamId) && isAwayTeam(m, ...opposingIds))
         )

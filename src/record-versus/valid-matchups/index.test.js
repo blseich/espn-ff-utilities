@@ -7,7 +7,7 @@ const matchup1 = {
     home: {
         teamId: 2,
     },
-    scoringPeriodId: 1,
+    matchupPeriodId: 1,
 };
 const matchup2 = {
     away: {
@@ -16,7 +16,7 @@ const matchup2 = {
     home: {
         teamId: 4,
     },
-    scoringPeriodId: 1,
+    matchupPeriodId: 1,
 };
 const matchup3 = {
     away: {
@@ -25,7 +25,7 @@ const matchup3 = {
     home: {
         teamId: 1,
     },
-    scoringPeriodId: 1,
+    matchupPeriodId: 1,
 };
 const matchup4 = {
     away: {
@@ -34,7 +34,7 @@ const matchup4 = {
     home: {
         teamId: 1,
     },
-    scoringPeriodId: 2,
+    matchupPeriodId: 2,
 };
 
 const schedule = [
