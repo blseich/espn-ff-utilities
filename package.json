@@ -1,13 +1,14 @@
 {
   "name": "espn-ff-utilities",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A module that utilizes ESPN's fantasy football API structure to provide useful data about a teams performance on a weekly basis",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
     "build": "babel src/ -d lib/",
-    "flow": "flow"
+    "flow": "flow",
+    "prepublishOnly": "npm run test && npm run lint && npm run flow && npm run build"
   },
   "keywords": [
     "fantasy"

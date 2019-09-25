@@ -1,4 +1,5 @@
 // @flow
+import getCurrentScoringPeriodMatchups from '../current-scoring-period-matchups';
 import { type TeamScoringPeriodResult, type Matchup } from '../../types';
 
 const extractIndividualMatchupResults = (
@@ -11,7 +12,7 @@ const getCurrentScoringPeriodResults = (
     scoringPeriodId: number,
     schedule: Array<Matchup>,
 ): Array<TeamScoringPeriodResult> => (
-    schedule.filter((matchup: Matchup): boolean => matchup.matchupPeriodId === scoringPeriodId)
+    getCurrentScoringPeriodMatchups(scoringPeriodId, schedule)
         .reduce(extractIndividualMatchupResults, [])
 );
 

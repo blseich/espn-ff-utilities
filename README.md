@@ -17,7 +17,7 @@ This module uses information from the `settings` and `schedule` fields of the re
 - [bestWeeklyScore(scoringPeriodId, teamId, schedule, settings)](#bestWeeklyScore)
 - [realWeeklyScore(scoringPeriodId, teamId, schedule)](#realWeeklyScore)
 - [recordVersus(scoringPeriodId, teamId, opposingIds, schedule)](#recordVersus)
-
+- [didWin(scoringPeriodId, teamId, schedule)](#didWin)
 
 ### adjustedVictories
 ```ts
@@ -68,6 +68,16 @@ recordVersus(
 Calculates a team's record against a given array of opponents up to a specified scoring period.
  - Note: Passing an empty array to `opposingIds` will calculate the team's record against all opponents up to the given scoring period
 
+ ### didWin
+```ts
+didWin(
+    scoringPeriodId: number,
+    teamId: number,
+    schedule: Array<Matchup>
+) => boolean
+```
+Determines if a team won their matchup in a given scoring period.
+
 ## Initialization
 
 All functions are provided in their raw form through the default import:
@@ -95,13 +105,15 @@ const {
     adjustedVictories, 
     bestWeeklyScore,
     realWeeklyScore,
-    recordVersus
+    recordVersus,
+    didWin,
 } = espnFfInit(scoringPeriodId, schedule, settings);
 ...
 adjustedVictories(scoringPeriodId, teamId);
 bestWeeklyScore(scoringPeriodId, teamId);
 realWeeklyScore(scoringPeriodId, teamId);
 recordVersus(scoringPeriodId, teamId, opposingIds);
+didWin(scoringPeriodId, teamId);
 ```
 
 ### initForScoringPeriod
@@ -120,11 +132,13 @@ const {
     adjustedVictories, 
     bestWeeklyScore,
     realWeeklyScore,
-    recordVersus
+    recordVersus,
+    didWin,
 } = espnFfInit(scoringPeriodId, schedule, settings);
 ...
 adjustedVictories(teamId);
 bestWeeklyScore(teamId);
 realWeeklyScore(teamId);
 recordVersus(teamId, opposingIds);
+didWin(teamId);
 ```
