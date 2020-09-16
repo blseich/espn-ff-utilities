@@ -3,7 +3,7 @@
 ## Overview
 
 A library for extracting useful metrics from ESPN's v3 fantasy football API. The API isn't well documented so it's mostly been figured out by inspecting network calls on the ESPN fantasy website. If you are looking to utilize this package you will need information using the following URL.
-```http://fantasy.espn.com/apis/v3/games/ffl/seasons/<year>/segments/0/leagues/<leagueId>?view=mBoxscore&view=mMathcupScore&view=mTeams&view=mSettings```
+```http://fantasy.espn.com/apis/v3/games/ffl/seasons/<year>/segments/0/leagues/<leagueId>?view=mBoxscore&view=mMatchupScore&view=mTeams&view=mSettings```
 ### Some notes about the endpoint
  - League Id can be obtained by logging in to ESPN's fantasy website and finding it in the URL
  - To fetch responses from this URL you will need the `SWID` and `espn_s2` cookies from the .espn.com domain
