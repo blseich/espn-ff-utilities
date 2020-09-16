@@ -19,5 +19,6 @@ export type TeamScoringPeriodResult = {
 export type Matchup = {
     away: TeamScoringPeriodResult,
     home: TeamScoringPeriodResult,
-    matchupPeriodId: number
+    matchupPeriodId: number,
+    winner: string
 };

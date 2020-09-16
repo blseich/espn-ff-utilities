@@ -33,7 +33,7 @@ type InitializedFunctionsWithSpi = {
     didWin: InitializedDidWinWithSpiFn
 };
 
-const init = (schedule: Array<Matchup>, settings: Settings): InitializedFunctions => {
+export const init = (schedule: Array<Matchup>, settings: Settings): InitializedFunctions => {
     const adjVictoriesInit: InitializedAdjustedVictoriesFn = (scoringPeriodId, teamId) => (
         adjustedVictories(scoringPeriodId, teamId, schedule)
     );
@@ -58,7 +58,7 @@ const init = (schedule: Array<Matchup>, settings: Settings): InitializedFunction
     };
 };
 
-const initForScoringPeriod = (
+export const initForScoringPeriod = (
     scoringPeriodId: number,
     schedule: Array<Matchup>,
     settings: Settings,
